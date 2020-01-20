@@ -49,7 +49,7 @@ jobs:
         echo "configs/templates/$m.config not found "
         exit 1
         fi
-        config=configs/templates/$m.config
+        config="configs/templates/$m.config"
         #####################################################################################
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST/d' $config #删除配置项MENTOHUST
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER/d' $config #删除配置项SOFTETHERVPN
