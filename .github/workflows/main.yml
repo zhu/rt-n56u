@@ -41,7 +41,7 @@ jobs:
         TNAME: "K2P-5.0"
       run: |
         cwd=`pwd`
-        CONFIG_TOOLCHAIN_DIR=${cwd//\//\\\/}\\/toolchain-mipsel
+        CONFIG_TOOLCHAIN_DIR=${cwd//\//\\\/}\\/toolchain-3.4.x
         cd trunk
         for m in $TNAME;
         do
