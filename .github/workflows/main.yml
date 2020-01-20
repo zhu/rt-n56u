@@ -50,6 +50,7 @@ jobs:
         exit 1
         fi
         config="configs/templates/$m.config"
+        echo $config "|" "configs/templates/$m.config"
         #####################################################################################
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST/d' $config #删除配置项MENTOHUST
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER/d' $config #删除配置项SOFTETHERVPN
