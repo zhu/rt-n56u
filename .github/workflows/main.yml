@@ -45,15 +45,15 @@ jobs:
         cd trunk
         for m in $TNAME;
         do
+          config="configs/templates/$m.config"
         if [ -f $cwd/.github/workflows/$m.config ] ; then
           echo "use $cwd/.github/workflows/$m.config"
-          config=$cwd/.github/workflows/$m.config
+          cp "$cwd/.github/workflows/$m.config" $config
         else
           if [ ! -f configs/templates/$m.config ] ; then
             echo "configs/templates/$m.config not found "
             exit 1
           fi
-          config="configs/templates/$m.config"
           #####################################################################################
           sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST/d' $config #删除配置项MENTOHUST
           sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER/d' $config #删除配置项SOFTETHERVPN
