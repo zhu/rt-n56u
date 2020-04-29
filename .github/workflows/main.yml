@@ -97,9 +97,9 @@ jobs:
             ####################################################################################
           fi
           # sed -i "s/^CONFIG_TOOLCHAIN_DIR=.*$/CONFIG_TOOLCHAIN_DIR=${CONFIG_TOOLCHAIN_DIR}/g" $config
-          sudo ./clear_tree_simple
-          sudo ./build_firmware_modify $m
-          sudo mv -f images/*.trx /opt/images/
+          ./clear_tree_simple
+          ./build_firmware_modify $m
+          mv -f images/*.trx /opt/images/
         done
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v1-release
