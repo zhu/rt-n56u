@@ -17,7 +17,7 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     container:
-      image: zhu/rt-n56u-builder-docker
+      image: zhumumu/rt-n56u-builder-docker
       volumes:
         - opt_vol:/opt
 
