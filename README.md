@@ -86,6 +86,8 @@ Contributors of this project are not responsible for what happens next.
 >- XY-C1 (USB)
 >- WR1200JS (USB)
 >- NEWIFI3 (USB)
+>- B70 (USB)
+>- A3004NS (USB)
 >- K2P
 >- K2P-USB (USB)
 >- JCG-836PRO (USB)
@@ -93,6 +95,8 @@ Contributors of this project are not responsible for what happens next.
 >- DIR-882 (USB)
 >- DIR-878
 >- MR2600 (USB)
+>- WDR7300
+>- RM2100
 
 ***
 
@@ -100,10 +104,37 @@ Contributors of this project are not responsible for what happens next.
 
 * 安装依赖包
 ```shell
+# Debian/Ubuntu
 sudo apt update
 sudo apt install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
 cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
-pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev
+pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+
+# CentOS 7
+sudo yum update
+sudo yum install ncurses-* flex byacc bison zlib-* texinfo gmp-* mpfr-* gettext \
+libtool* libmpc-* gettext-* python-docutils nano help2man
+sudo yum groupinstall "Development Tools"
+
+# CentOS 8
+sudo yum update
+sudo yum install ncurses-* flex byacc bison zlib-* gmp-* mpfr-* gettext \
+libtool* libmpc-* gettext-* nano
+sudo yum groupinstall "Development Tools"
+# CentOS 8不能直接通过yum安装texinfo，help2man，python-docutils。请去官网下载发行的安装包编译安装
+# 以texinfo为例
+# cd /usr/local/src
+# sudo wget http://ftp.gnu.org/gnu/texinfo/texinfo-6.7.tar.gz
+# sudo tar zxvf texinfo-6.7.tar.gz
+# cd texinfo-6.7
+# sudo ./configure
+# sudo make
+# sudo make install
+
+# Archlinux/Manjaro
+sudo pacman -Syu --needed git base-devel cmake gperf ncurses libmpc gmp python-docutils \
+vim rpcsvc-proto
+
 ```
 * 克隆源码
 ```shell
@@ -114,14 +145,17 @@ git clone --depth=1 https://gitee.com/hanwckf/rt-n56u.git /opt/rt-n56u
 ```shell
 cd /opt/rt-n56u/toolchain-mipsel
 
-# 可以从源码编译工具链，这需要一些时间：
+# （推荐）使用脚本下载预编译的工具链：
+sh dl_toolchain.sh
+
+# 或者，也可以从源码编译工具链，这需要一些时间：
+# Manjaro/ArchLinux 用户请使用gcc-8
+# sudo pacman -S gcc8
+# sudo ln -sf /usr/bin/gcc-8 /usr/local/bin/gcc
+# sudo ln -sf /usr/bin/g++-8 /usr/local/bin/g++
 ./clean_toolchain
 ./build_toolchain
 
-# 或者下载预编译的工具链：
-mkdir -p toolchain-3.4.x
-wget https://github.com/hanwckf/padavan-toolchain/releases/download/v1.0/mipsel-linux-uclibc.tar.xz
-tar -xvf mipsel-linux-uclibc.tar.xz -C toolchain-3.4.x
 ```
 * (可选) 修改机型配置文件
 ```shell

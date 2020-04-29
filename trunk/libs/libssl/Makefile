@@ -1,10 +1,10 @@
-SRC_NAME=openssl-1.0.2t
-SRC_URL=https://www.openssl.org/source/$(SRC_NAME).tar.gz
+SRC_NAME=openssl-1.0.2u
+SRC_URL=https://www.openssl.org/source/old/1.0.2/$(SRC_NAME).tar.gz
 
 # openssl use CROSS_COMPILE prefix
 CC=gcc $(CPUFLAGS)
 
-COPTS=-ffunction-sections -fdata-sections -Wl,--gc-sections -I$(DESTDIR)/include
+COPTS=-ffunction-sections -fdata-sections -I$(DESTDIR)/include
 COPTS+=$(if $(CONFIG_IPV6),-DOPENSSL_USE_IPV6=1,)
 COPTS+=-DOPENSSL_SMALL_FOOTPRINT
 
