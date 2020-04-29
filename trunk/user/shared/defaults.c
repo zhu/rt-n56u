@@ -220,11 +220,17 @@ struct nvram_pair router_defaults[] = {
 	{ "wl_greenap", "0" },
 	{ "wl_ldpc", "2" },
 	{ "wl_HT_RDG", "0" },
+#if defined (USE_WID_5G) && USE_WID_5G==7615
+	{ "wl_HT_AMSDU", "1" },
+#else
 	{ "wl_HT_AMSDU", "0" },
+#endif
 	{ "wl_HT_MpduDensity", "5" },
 	{ "wl_HT_BAWinSize", "64" },
 	{ "wl_HT_AutoBA", "1" },
 	{ "wl_VgaClamp", "0" },
+	{ "wl_KickStaRssiLow", "0" },
+	{ "wl_AssocReqRssiThres", "0" },
 
 	// guest AP 5Ghz
 	{ "wl_guest_enable", "0" },
@@ -243,8 +249,7 @@ struct nvram_pair router_defaults[] = {
 	{ "wl_guest_mcs_mode", "0" },
 
 #if defined (USE_WID_5G) && USE_WID_5G==7615
-	{ "wl_band_steering", "0" },
-	{ "wl_mumimo", "1" },
+	{ "wl_mumimo", "0" },
 #endif
 
 	// ApCli 5Ghz
@@ -321,6 +326,8 @@ struct nvram_pair router_defaults[] = {
 	{ "rt_HT_BAWinSize", "64" },
 	{ "rt_HT_AutoBA", "1" },
 	{ "rt_VgaClamp", "0" },
+	{ "rt_KickStaRssiLow", "0" },
+	{ "rt_AssocReqRssiThres", "0" },
 
 	// guest AP 2.4Ghz
 	{ "rt_guest_enable", "0" },
