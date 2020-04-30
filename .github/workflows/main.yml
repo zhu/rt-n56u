@@ -35,9 +35,38 @@ jobs:
       run: |
         cd toolchain-mipsel
         ./clean_toolchain
-        ./build_toolchain
-        mkdir -p /opt/rt-n56u
-        cp -r -t /opt/rt-n56u `pwd`
+        
+        # change from ./build_toolchain
+        unset LD_LIBRARY_PATH
+
+        echo "================ START BUILDING TOOLCHAIN =============="
+
+        if [ ! -f configure ]; then
+          ./bootstrap || exit 1
+        fi
+        if [ ! -f Makefile ]; then
+          ./configure --enable-local || exit 1
+        fi
+        if [ ! -f ct-ng ]; then
+          make || exit 1
+        fi
+        if [ ! -d dl ]; then
+          echo "============= CREATE LOCAL TARBALLS DIR ================"
+          mkdir dl
+        fi
+        if [ -d .build ]; then
+          echo "============== CLEANING OLD BUILD TREE ================="
+          ./ct-ng clean
+        fi
+
+        (./ct-ng V=1 mipsel-linux-uclibc && ./ct-ng V=1 build) || exit 1 # add V=1: no human-readable msg, has commands
+
+        echo "====================All IS DONE!========================"
+        
+        mkdir -p /opt/rt-n56u/toolchain-mipsel
+        cp -r -t /opt/rt-n56u/toolchain-mipsel toolchain-3.4.x
+        
+        ./clean_toolchain # free disk space
     - name: Build Firmware
       env:
         TNAME: "K2P-5.0"
