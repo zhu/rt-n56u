@@ -34,7 +34,7 @@ jobs:
       if: steps.cache-toolchain.outputs.cache-hit != 'true'
       run: |
         cd toolchain-mipsel
-        ./dl_toolchain
+        sh ./dl_toolchain.sh
         
         mkdir -p /opt/rt-n56u/toolchain-mipsel
         cp -r -t /opt/rt-n56u/toolchain-mipsel toolchain-3.4.x
