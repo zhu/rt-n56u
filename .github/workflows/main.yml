@@ -8,10 +8,6 @@ on:
 #    - 'v*'
     branches: 
       - my_build
-  #schedule:
-    #- cron: 0 17 * * 4
-#  watch:
-   # types: [started]
 
 jobs:
   build:
